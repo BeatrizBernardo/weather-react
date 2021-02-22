@@ -6,7 +6,7 @@ import Forecast from "./Forecast";
 
 export default function Search() {
   const [city, setCity] = useState("Lisbon");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState("19:00");
   const [time, setTime] = useState("");
   const [degrees, setDegrees] = useState("");
   const [image, setImage] = useState("");
