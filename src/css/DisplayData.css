@@ -1,0 +1,66 @@
+.DisplayData .current-city-name,
+.DisplayData .current-city-data,
+.DisplayData .C-Degrees,
+.DisplayData .F-Degrees {
+  font-family: "Baloo Chettan 2", cursive;
+  color: #522d5b;
+}
+
+.DisplayData .current-city-data {
+  background-color: rgba(203, 186, 204, 0.9);
+  border: 1px solid #522d5b;
+  border-radius: 4px;
+  font-size: 40px;
+}
+
+.DisplayData .C-Degrees,
+.DisplayData .F-Degrees {
+  text-decoration: none;
+  transition: all 200ms ease-in-out;
+}
+
+.DisplayData .C-Degrees:hover,
+.DisplayData .F-Degrees:hover,
+.DisplayData .C-Degrees:focus,
+.DisplayData .F-Degrees:focus {
+  cursor: pointer;
+  color: #900c3f;
+}
+
+.DisplayData .current-city-name {
+  line-height: 0.8;
+  font-size: 50px;
+}
+
+.DisplayData .current-city-data,
+.DisplayData .current-city-name {
+  text-align: center;
+  font-weight: bold;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+.DisplayData .current-city-data-image {
+  padding: 0;
+}
+
+.DisplayData .current-city-data-time,
+.DisplayData .current-city-data-image,
+.DisplayData .current-city-data-image-description,
+.DisplayData .current-city-data-image-speed,
+.DisplayData .current-city-data-image-humidity {
+  display: block;
+  font-size: 20px;
+}
+
+.DisplayData .current-city-data-image-description {
+  color: #900c3f;
+}
+
+.DisplayData .current-city-data-temperature,
+.DisplayData .current-city-data-d {
+  display: block;
+  padding-top: 45px;
+}

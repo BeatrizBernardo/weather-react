@@ -1,0 +1,27 @@
+.Search .search-form {
+  text-align: center;
+}
+
+.Search .search-field {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+}
+
+.Search .search-button {
+  display: inline;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.Search .fa-search {
+  color: #522d5b;
+  font-size: 20px;
+}
+
+.Search .search-button,
+.Search .search-field {
+  border: 1px solid #522d5b;
+  border-radius: 4px;
+  margin: 0 2px 0 2px;
+}

@@ -1,0 +1,17 @@
+.Author .open-source {
+  text-align: center;
+  font-weight: bold;
+  font-family: "Baloo Chettan 2", cursive;
+  color: #522d5b;
+}
+
+.Author .open-source-links {
+  text-decoration: none;
+  transition: all 200ms ease-in-out;
+  color: #522d5b;
+}
+
+.Author .open-source-links:hover {
+  cursor: pointer;
+  color: #900c3f;
+}
