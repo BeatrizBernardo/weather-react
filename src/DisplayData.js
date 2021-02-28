@@ -39,6 +39,7 @@ export default function DisplayData(props) {
             </span>
             <span className="current-city-data-time">
               {currentWeather.time}
+              {console.log("Display the weather...")}
             </span>
           </div>
           <div className="col-sm current-city-data-temperature">

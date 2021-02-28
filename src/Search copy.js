@@ -6,7 +6,7 @@ import Forecast from "./Forecast";
 import "./css/Search.css";
 
 export default function Search() {
-  const [city, setCity] = useState("Lisbon");
+  const [city, setCity] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [degrees, setDegrees] = useState("");
@@ -16,6 +16,22 @@ export default function Search() {
   const [humidity, setHumidity] = useState("");
   const [unit, setUnit] = useState("metric");
   const [loaded, setLoaded] = useState(false);
+
+  let apiKey = "8e6bcc493a1dde09d842b31c9a0c6dba";
+  let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
+  let apiURLStatic = `https://api.openweathermap.org/data/2.5/weather?q=Lisbon&appid=${apiKey}&units=${unit}`;
+
+  function getCity(event) {
+    event.preventDefault();
+    setLoaded(false);
+    setCity(event.target.value);
+  }
+
+  function showData(event) {
+    event.preventDefault();
+    setLoaded(true);
+    axios.get(apiURL).then(getData);
+  }
 
   //receive a date, return in dd/mm
   function getDayMonth(d) {
@@ -90,6 +106,32 @@ export default function Search() {
     return `${hour}:${minute}`;
   }
 
+  function getData(response) {
+    setCity(response.data.name);
+    setDate(getCompleteDate(response.data.dt));
+    setTime(getCompleteTime(response.data.dt));
+    setDegrees(response.data.main.temp);
+    setImage(
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+    setDescription(response.data.weather[0].description);
+    setWind(Math.round(response.data.wind.speed));
+    setHumidity(Math.round(response.data.main.humidity));
+  }
+
+  function getDataStatic(response) {
+    setCity(response.data.name);
+    setDate(getCompleteDate(response.data.dt));
+    setTime(getCompleteTime(response.data.dt));
+    setDegrees(response.data.main.temp);
+    setImage(
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+    setDescription(response.data.weather[0].description);
+    setWind(Math.round(response.data.wind.speed));
+    setHumidity(Math.round(response.data.main.humidity));
+  }
+
   let form = (
     <form>
       <div className="group-form search-form">
@@ -97,8 +139,9 @@ export default function Search() {
           type="text"
           placeholder="Type the city here"
           className="form-control search-field"
+          onChange={getCity}
         />
-        <button className="btn search-button" type="submit">
+        <button className="btn search-button" type="submit" onClick={showData}>
           <i className="fas fa-search"></i>
         </button>
         <button className="btn search-button" type="button">
@@ -111,67 +154,19 @@ export default function Search() {
     </form>
   );
 
-  function getStartedData() {
-    let apiKey = "8e6bcc493a1dde09d842b31c9a0c6dba";
-    let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
-    console.log("----- enter to call axios");
-    axios.get(apiURL).then(getData);
-    console.log("----- exit from call axios");
-    setLoaded(true);
-  }
-
-  function getData(response) {
-    console.log("Getting the data from axios");
-    setCity(response.data.name);
-    console.log(response.data.name);
-    console.log(city);
-    setDate(getCompleteDate(response.data.dt));
-    console.log(getCompleteDate(response.data.dt));
-    console.log(date);
-    setTime(getCompleteTime(response.data.dt));
-    console.log(getCompleteTime(response.data.dt));
-    setDegrees(response.data.main.temp);
-    console.log(response.data.main.temp);
-    setImage(
-      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-    );
-    setDescription(response.data.weather[0].description);
-    console.log(response.data.weather[0].description);
-    setWind(Math.round(response.data.wind.speed));
-    console.log(response.data.wind.speed);
-    setHumidity(Math.round(response.data.main.humidity));
-    console.log(Math.round(response.data.main.humidity));
-    setLoaded(true);
-    {
-      console.log(
-        `....data  ${city} / ${date} / ${time} / ${degrees} / ${humidity} / ${wind}`
-      );
-    }
-  }
-
   if (loaded) {
     return (
       <div className="Search">
         {form}
-        <DisplayData
-          city={city}
-          date="19/02/2021"
-          time="Friday 20:00"
-          degrees={19}
-          image="☀"
-          description="sunny"
-          wind={2}
-          humidity={10}
-        />
+        <DisplayData />
         <Forecast />
       </div>
     );
   } else {
-    getStartedData();
     return (
       <div className="Search">
+        {axios.get(apiURLStatic).then(getDataStatic)}
         {form}
-        {console.log(`...data before display ${city} / ${date} / ${time}`)}
         <DisplayData
           city={city}
           date={date}
@@ -179,8 +174,9 @@ export default function Search() {
           degrees={degrees}
           image={image}
           description={description}
-          wind={wind}
           humidity={humidity}
+          wind={wind}
+          unit={unit}
         />
         <Forecast />
       </div>
