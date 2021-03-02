@@ -148,7 +148,7 @@ export default function Search() {
     setTime(getCompleteTime(response.data.dt));
     setDegrees(Math.round(response.data.main.temp));
     setImage(
-      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+      `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
     setDescription(response.data.weather[0].description);
     setWind(Math.round(response.data.wind.speed));
