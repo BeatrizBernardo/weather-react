@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./css/ListOfCities.css";
+import DisplayData from "./DisplayData";
 
 export default function ListOfCities() {
   return (
