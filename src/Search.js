@@ -114,34 +114,22 @@ export default function Search() {
   function getStartedData() {
     let apiKey = "8e6bcc493a1dde09d842b31c9a0c6dba";
     let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
-    console.log("----- enter to call axios");
     axios.get(apiURL).then(getData);
-    console.log("----- exit from call axios");
-    setLoaded(true);
   }
 
   function getData(response) {
     console.log("Getting the data from axios");
     setCity(response.data.name);
-    console.log(response.data.name);
-    console.log(city);
     setDate(getCompleteDate(response.data.dt));
-    console.log(getCompleteDate(response.data.dt));
-    console.log(date);
     setTime(getCompleteTime(response.data.dt));
-    console.log(getCompleteTime(response.data.dt));
-    setDegrees(response.data.main.temp);
-    console.log(response.data.main.temp);
+    setDegrees(Math.round(response.data.main.temp));
     setImage(
       `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
     setDescription(response.data.weather[0].description);
-    console.log(response.data.weather[0].description);
     setWind(Math.round(response.data.wind.speed));
-    console.log(response.data.wind.speed);
     setHumidity(Math.round(response.data.main.humidity));
-    console.log(Math.round(response.data.main.humidity));
-    setLoaded(true);
+    setLoaded(false);
     {
       console.log(
         `....data  ${city} / ${date} / ${time} / ${degrees} / ${humidity} / ${wind}`
@@ -171,7 +159,6 @@ export default function Search() {
     return (
       <div className="Search">
         {form}
-        {console.log(`...data before display ${city} / ${date} / ${time}`)}
         <DisplayData
           city={city}
           date={date}

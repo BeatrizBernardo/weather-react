@@ -39,7 +39,7 @@ export default function DisplayData(props) {
             </span>
             <span className="current-city-data-time">
               {currentWeather.time}
-              {console.log("Display the weather...")}
+              {console.log(`Display the weather... ${currentWeather.time}`)}
             </span>
           </div>
           <div className="col-sm current-city-data-temperature">
@@ -65,7 +65,11 @@ export default function DisplayData(props) {
           </div>
           <div className="col-sm">
             <span className="current-city-data-image">
-              {currentWeather.image}
+              <img
+                className="img"
+                src={currentWeather.image}
+                alt={currentWeather.description}
+              />
             </span>
             <span className="current-city-data-image-description">
               {currentWeather.description}

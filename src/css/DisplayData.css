@@ -46,6 +46,10 @@
   padding: 0;
 }
 
+.DisplayData .img {
+  max-width: 35%;
+}
+
 .DisplayData .current-city-data-time,
 .DisplayData .current-city-data-image,
 .DisplayData .current-city-data-image-description,
