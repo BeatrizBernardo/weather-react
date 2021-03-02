@@ -21,7 +21,7 @@ export default function Search() {
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
 
-  let apiEndpoint = "http://api.openweathermap.org/data/2.5/weather";
+  let apiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
   let apiKey = "8e6bcc493a1dde09d842b31c9a0c6dba";
 
   //receive a date, return in dd/mm
