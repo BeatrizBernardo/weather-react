@@ -10,7 +10,6 @@ export default function App() {
   return (
     <div className="App">
       <div className="row">
-        <img src="./images/11.jpg" alt="" />
         {/*Mudar as frases consuante o tempo */}
         <h1 className="title">Lets see how warm is today!</h1>
 

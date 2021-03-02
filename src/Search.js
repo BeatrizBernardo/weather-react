@@ -21,7 +21,7 @@ export default function Search() {
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
 
-  let apiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
+  //let apiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
   let apiKey = "8e6bcc493a1dde09d842b31c9a0c6dba";
 
   //receive a date, return in dd/mm
@@ -124,20 +124,20 @@ export default function Search() {
 
   //current city by button
   function showCurrentCityData(event) {
-    event.preventDefault();
+    /*event.preventDefault();
 
     navigator.geolocation.getCurrentPosition(function (position) {
       console.log(position);
       setLatitude(position.coords.latitude);
       setLongitude(position.coords.longitude);
 
-      let apiURL = `${apiEndpoint}?appid=${apiKey}&units=${unit}&lat=${latitude}&lon=${longitude}`;
+      let apiURL = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&units=${unit}&lat=${latitude}&lon=${longitude}`;
       axios.get(apiURL).then(getData);
-    });
+    });*/
   }
 
   function getStartedData() {
-    let apiURL = `${apiEndpoint}?q=${city}&appid=${apiKey}&units=${unit}`;
+    let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
     axios.get(apiURL).then(getData);
   }
 
@@ -148,7 +148,7 @@ export default function Search() {
     setTime(getCompleteTime(response.data.dt));
     setDegrees(Math.round(response.data.main.temp));
     setImage(
-      `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
     setDescription(response.data.weather[0].description);
     setWind(Math.round(response.data.wind.speed));
