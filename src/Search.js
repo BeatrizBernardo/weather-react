@@ -15,7 +15,14 @@ export default function Search() {
   const [wind, setWind] = useState("");
   const [humidity, setHumidity] = useState("");
   const [unit, setUnit] = useState("metric");
+
   const [loaded, setLoaded] = useState(false);
+
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
+
+  let apiEndpoint = "http://api.openweathermap.org/data/2.5/weather";
+  let apiKey = "8e6bcc493a1dde09d842b31c9a0c6dba";
 
   //receive a date, return in dd/mm
   function getDayMonth(d) {
@@ -101,7 +108,11 @@ export default function Search() {
         <button className="btn search-button" type="submit">
           <i className="fas fa-search"></i>
         </button>
-        <button className="btn search-button" type="button">
+        <button
+          className="btn search-button"
+          type="button"
+          onClick={showCurrentCityData}
+        >
           Current City
         </button>
         <button className="btn search-button" type="button">
@@ -111,9 +122,22 @@ export default function Search() {
     </form>
   );
 
+  //current city by button
+  function showCurrentCityData(event) {
+    event.preventDefault();
+
+    navigator.geolocation.getCurrentPosition(function (position) {
+      console.log(position);
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+
+      let apiURL = `${apiEndpoint}?appid=${apiKey}&units=${unit}&lat=${latitude}&lon=${longitude}`;
+      axios.get(apiURL).then(getData);
+    });
+  }
+
   function getStartedData() {
-    let apiKey = "8e6bcc493a1dde09d842b31c9a0c6dba";
-    let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
+    let apiURL = `${apiEndpoint}?q=${city}&appid=${apiKey}&units=${unit}`;
     axios.get(apiURL).then(getData);
   }
 
