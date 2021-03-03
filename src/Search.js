@@ -21,8 +21,10 @@ export default function Search() {
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
 
+  const [tempCity, setTempCity] = useState("");
+
   //let apiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
-  let apiKey = "8e6bcc493a1dde09d842b31c9a0c6dba";
+  let apiKey = "7ec05f26b77b01d3642a971e0b2d2553";
 
   //receive a date, return in dd/mm
   function getDayMonth(d) {
@@ -98,12 +100,13 @@ export default function Search() {
   }
 
   let form = (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="group-form search-form">
         <input
           type="text"
           placeholder="Type the city here"
           className="form-control search-field"
+          onChange={getCity}
         />
         <button className="btn search-button" type="submit">
           <i className="fas fa-search"></i>
@@ -121,6 +124,17 @@ export default function Search() {
       </div>
     </form>
   );
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    setCity(tempCity);
+    getStartedData();
+  }
+
+  function getCity(event) {
+    /** add the city to a temporary variable, to not target the city variable */
+    setTempCity(event.target.value);
+  }
 
   //current city by button
   function showCurrentCityData(event) {
