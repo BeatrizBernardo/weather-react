@@ -9,19 +9,21 @@ import "./css/App.css";
 export default function App() {
   return (
     <div className="App">
-      <div className="row">
-        {/*Mudar as frases consuante o tempo */}
-        <h1 className="title">Lets see how warm is today!</h1>
+      <div class="container">
+        <div className="row">
+          {/*Mudar as frases consuante o tempo */}
+          <h1 className="title">Lets see how warm is today!</h1>
 
-        {/**left side */}
-        <div className="col-sm-8 left-column">
-          <Search />
-        </div>
+          {/**left side */}
+          <div className="col-sm-8 left-column">
+            <Search />
+          </div>
 
-        {/**right side */}
-        <div className="col-sm-4 right-column">
-          <ListOfCities />
-          <Author />
+          {/**right side */}
+          <div className="col-sm-4 right-column">
+            <ListOfCities />
+            <Author />
+          </div>
         </div>
       </div>
     </div>
