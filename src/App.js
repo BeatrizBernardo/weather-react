@@ -9,14 +9,14 @@ import "./css/App.css";
 export default function App() {
   return (
     <div className="App">
-      <div class="container">
+      <div className="container">
         <div className="row">
           {/*Mudar as frases consuante o tempo */}
           <h1 className="title">Lets see how warm is today!</h1>
 
           {/**left side */}
           <div className="col-sm-8 left-column">
-            <Search />
+            <Search city="Lisbon" />
           </div>
 
           {/**right side */}

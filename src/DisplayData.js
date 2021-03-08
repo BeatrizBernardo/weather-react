@@ -2,8 +2,7 @@ import "./css/DisplayData.css";
 import React, { useState } from "react";
 
 export default function DisplayData(props) {
-  const [degrees, setDegrees] = useState(props.degrees);
-  let currentWeather = {
+  const [currentWeather, setCurrentWeather] = useState({
     city: props.city,
     date: props.date,
     time: props.time,
@@ -12,19 +11,22 @@ export default function DisplayData(props) {
     description: props.description,
     wind: props.wind,
     humidity: props.humidity,
-  };
+    unit: props.unit,
+  });
 
   function convertToFahrenheitDegree(event) {
-    if (props.unit === "metric") {
+    let d = currentWeather.degrees;
+    if (currentWeather.unit === "metric") {
       event.preventDefault();
-      setDegrees(Math.round({ degrees } * 1.8 + 32));
+      setCurrentWeather({ degrees: Math.round({ d } * 1.8 + 32) });
     }
   }
 
   function convertToCelsiusDegree(event) {
-    if (props.unit === "imperial") {
+    let d = currentWeather.degrees;
+    if (currentWeather.unit === "imperial") {
       event.preventDefault();
-      setDegrees(Math.round(({ degrees } - 32) / 1.8));
+      setCurrentWeather({ degrees: Math.round(({ d } - 32) / 1.8) });
     }
   }
 
@@ -39,7 +41,6 @@ export default function DisplayData(props) {
             </span>
             <span className="current-city-data-time">
               {currentWeather.time}
-              {console.log(`Display the weather... ${currentWeather.time}`)}
             </span>
           </div>
           <div className="col-sm current-city-data-temperature">

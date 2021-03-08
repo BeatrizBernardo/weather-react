@@ -5,23 +5,15 @@ import Forecast from "./Forecast";
 
 import "./css/Search.css";
 
-export default function Search() {
-  const [city, setCity] = useState("Lisbon");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-  const [degrees, setDegrees] = useState("");
-  const [image, setImage] = useState("");
-  const [description, setDescription] = useState("");
-  const [wind, setWind] = useState("");
-  const [humidity, setHumidity] = useState("");
-  const [unit, setUnit] = useState("metric");
+export default function Search(props) {
+  const [currentWeather, setCurrentWeather] = useState({ unit: "metric" });
 
   const [loaded, setLoaded] = useState(false);
 
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
 
-  const [tempCity, setTempCity] = useState("");
+  const [tempCity, setTempCity] = useState(props.city);
 
   //let apiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
   let apiKey = "7ec05f26b77b01d3642a971e0b2d2553";
@@ -127,7 +119,6 @@ export default function Search() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    setCity(tempCity);
     getStartedData();
   }
 
@@ -151,28 +142,22 @@ export default function Search() {
   }
 
   function getStartedData() {
-    let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`;
+    let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${tempCity}&appid=${apiKey}&units=${currentWeather.unit}`;
     axios.get(apiURL).then(getData);
   }
 
   function getData(response) {
-    console.log("Getting the data from axios");
-    setCity(response.data.name);
-    setDate(getCompleteDate(response.data.dt));
-    setTime(getCompleteTime(response.data.dt));
-    setDegrees(Math.round(response.data.main.temp));
-    setImage(
-      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-    );
-    setDescription(response.data.weather[0].description);
-    setWind(Math.round(response.data.wind.speed));
-    setHumidity(Math.round(response.data.main.humidity));
-    setLoaded(false);
-    {
-      console.log(
-        `....data  ${city} / ${date} / ${time} / ${degrees} / ${humidity} / ${wind}`
-      );
-    }
+    setCurrentWeather({
+      city: response.data.name,
+      date: getCompleteDate(response.data.dt),
+      time: getCompleteTime(response.data.dt),
+      degrees: Math.round(response.data.main.temp),
+      image: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+      description: response.data.weather[0].description,
+      wind: Math.round(response.data.wind.speed),
+      humidity: Math.round(response.data.main.humidity),
+    });
+    setLoaded(true);
   }
 
   if (loaded) {
@@ -180,14 +165,15 @@ export default function Search() {
       <div className="Search">
         {form}
         <DisplayData
-          city={city}
-          date="19/02/2021"
-          time="Friday 20:00"
-          degrees={19}
-          image="☀"
-          description="sunny"
-          wind={2}
-          humidity={10}
+          city={currentWeather.city}
+          date={currentWeather.date}
+          time={currentWeather.time}
+          degrees={currentWeather.degrees}
+          image={currentWeather.image}
+          description={currentWeather.description}
+          wind={currentWeather.wind}
+          humidity={currentWeather.humidity}
+          unit={currentWeather.unit}
         />
         <Forecast />
       </div>
@@ -197,17 +183,7 @@ export default function Search() {
     return (
       <div className="Search">
         {form}
-        <DisplayData
-          city={city}
-          date={date}
-          time={time}
-          degrees={degrees}
-          image={image}
-          description={description}
-          wind={wind}
-          humidity={humidity}
-        />
-        <Forecast />
+        Loading...
       </div>
     );
   }
