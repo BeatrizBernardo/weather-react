@@ -16,7 +16,7 @@ export default function App() {
 
           {/**left side */}
           <div className="col-sm-8 left-column">
-            <Search city="Lisbon" />
+            <Search city="Porto" />
           </div>
 
           {/**right side */}

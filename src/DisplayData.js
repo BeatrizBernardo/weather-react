@@ -1,56 +1,50 @@
 import "./css/DisplayData.css";
-import React, { useState } from "react";
+import React from "react";
 
 export default function DisplayData(props) {
-  const [currentWeather, setCurrentWeather] = useState({
-    city: props.city,
-    date: props.date,
-    time: props.time,
-    degrees: props.degrees,
-    image: props.image,
-    description: props.description,
-    wind: props.wind,
-    humidity: props.humidity,
-    unit: props.unit,
-  });
-
   function convertToFahrenheitDegree(event) {
-    let d = currentWeather.degrees;
-    if (currentWeather.unit === "metric") {
-      event.preventDefault();
-      setCurrentWeather({ degrees: Math.round({ d } * 1.8 + 32) });
+    event.preventDefault();
+    let d = props.degrees;
+    console.log("To F -- " + d);
+    console.log("to F unit -- " + props.unit);
+    if (props.unit === "metric") {
+      props.degrees = Math.round({ d } * 1.8 + 32);
+      props.unit = "imperial";
+      console.log("To F after-- " + props.degrees);
+      console.log("to F new unit -- " + props.unit);
     }
   }
 
   function convertToCelsiusDegree(event) {
-    let d = currentWeather.degrees;
-    if (currentWeather.unit === "imperial") {
-      event.preventDefault();
-      setCurrentWeather({ degrees: Math.round(({ d } - 32) / 1.8) });
+    event.preventDefault();
+    let d = props.degrees;
+    console.log("To C -- " + d);
+    console.log("to C unit -- " + props.unit);
+    if (props.unit === "imperial") {
+      props.degrees = Math.round(({ d } - 32) / 1.8);
+      props.unit = "metric";
+      console.log("To C after-- " + props.degrees);
+      console.log("to C new unit -- " + props.unit);
     }
   }
 
   return (
     <div className="DisplayData">
       <div className="container">
-        <h3 className="current-city-name">{currentWeather.city}</h3>
+        <h3 className="current-city-name">{props.city}</h3>
         <div className="row current-city-data">
           <div className="col-sm current-city-data-d">
-            <span className="current-city-data-date">
-              {currentWeather.date}
-            </span>
-            <span className="current-city-data-time">
-              {currentWeather.time}
-            </span>
+            <span className="current-city-data-date">{props.date}</span>
+            <span className="current-city-data-time">{props.time}</span>
           </div>
           <div className="col-sm current-city-data-temperature">
-            <span className="degrees">{currentWeather.degrees}</span>
+            <span className="degrees">{props.degrees}</span>
             <span>
               º
               <a
                 href="/"
                 className="C-Degrees"
-                onClick={convertToFahrenheitDegree}
+                onClick={convertToCelsiusDegree}
               >
                 C
               </a>
@@ -58,7 +52,7 @@ export default function DisplayData(props) {
               <a
                 href="/"
                 className="F-Degrees"
-                onClick={convertToCelsiusDegree}
+                onClick={convertToFahrenheitDegree}
               >
                 F
               </a>
@@ -66,20 +60,16 @@ export default function DisplayData(props) {
           </div>
           <div className="col-sm">
             <span className="current-city-data-image">
-              <img
-                className="img"
-                src={currentWeather.image}
-                alt={currentWeather.description}
-              />
+              <img className="img" src={props.image} alt={props.description} />
             </span>
             <span className="current-city-data-image-description">
-              {currentWeather.description}
+              {props.description}
             </span>
             <span className="current-city-data-image-speed">
-              Wind: {currentWeather.wind}km/h
+              Wind: {props.wind}km/h
             </span>
             <span className="current-city-data-image-humidity">
-              Humidity: {currentWeather.humidity}%
+              Humidity: {props.humidity}%
             </span>
           </div>
         </div>
