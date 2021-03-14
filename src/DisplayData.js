@@ -1,30 +1,29 @@
 import "./css/DisplayData.css";
 import React from "react";
+import CompleteDate from "./CompleteDate";
+import CompleteTime from "./CompleteTime";
 
 export default function DisplayData(props) {
+  let degrees = props.degrees;
   function convertToFahrenheitDegree(event) {
     event.preventDefault();
-    let d = props.degrees;
-    console.log("To F -- " + d);
-    console.log("to F unit -- " + props.unit);
+    let d = degrees;
+    console.log("To F .." + props.unit + "--- " + d);
     if (props.unit === "metric") {
-      props.degrees = Math.round({ d } * 1.8 + 32);
-      props.unit = "imperial";
-      console.log("To F after-- " + props.degrees);
-      console.log("to F new unit -- " + props.unit);
+      let de = Math.round(d * 1.8 + 32);
+      degrees = Object.assign(props.degrees, de);
+      console.log("--- " + props.degrees);
+      //Object.assign(props.unit, "imperial");
+      console.log("after F .." + props.unit + "--- ");
     }
   }
 
   function convertToCelsiusDegree(event) {
     event.preventDefault();
-    let d = props.degrees;
-    console.log("To C -- " + d);
-    console.log("to C unit -- " + props.unit);
+    let d = degrees;
     if (props.unit === "imperial") {
-      props.degrees = Math.round(({ d } - 32) / 1.8);
+      degrees = Math.round((d - 32) / 1.8);
       props.unit = "metric";
-      console.log("To C after-- " + props.degrees);
-      console.log("to C new unit -- " + props.unit);
     }
   }
 
@@ -34,11 +33,15 @@ export default function DisplayData(props) {
         <h3 className="current-city-name">{props.city}</h3>
         <div className="row current-city-data">
           <div className="col-sm current-city-data-d">
-            <span className="current-city-data-date">{props.date}</span>
-            <span className="current-city-data-time">{props.time}</span>
+            <span className="current-city-data-date">
+              <CompleteDate date={props.date} />
+            </span>
+            <span className="current-city-data-time">
+              <CompleteTime date={props.time} />
+            </span>
           </div>
           <div className="col-sm current-city-data-temperature">
-            <span className="degrees">{props.degrees}</span>
+            <span className="degrees">{degrees}</span>
             <span>
               º
               <a

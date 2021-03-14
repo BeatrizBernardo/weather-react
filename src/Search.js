@@ -7,89 +7,15 @@ import "./css/Search.css";
 
 export default function Search(props) {
   const [currentWeather, setCurrentWeather] = useState({ unit: "metric" });
+  const [tempCity, setTempCity] = useState(props.city);
 
   const [loaded, setLoaded] = useState(false);
 
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
 
-  const [tempCity, setTempCity] = useState(props.city);
-
   //let apiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
   let apiKey = "7ec05f26b77b01d3642a971e0b2d2553";
-
-  //receive a date, return in dd/mm
-  function getDayMonth(d) {
-    let date = new Date(d);
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-
-    if (day < 10) {
-      day = `0${day}`;
-    } else {
-      day = `${day}`;
-    }
-
-    if (month < 10) {
-      month = `0${month}`;
-    } else {
-      month = `${month}`;
-    }
-    return `${day}/${month}`;
-  }
-
-  function getCompleteDate(d) {
-    d = d * 1000;
-    let date = new Date(d);
-    let year = date.getFullYear();
-
-    let days = getDayMonth(d);
-    return `${days}/${year}`;
-  }
-
-  //receive a date, return in formate of Weekday hh:mm
-  function getCompleteTime(d) {
-    d = d * 1000;
-    let date = new Date(d);
-    let weekday = date.getDay();
-    let week = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    let time = getHoursMinutes(d, 1);
-    return `${week[weekday]} ${time}`;
-  }
-
-  //receive a date, return in hh:mm
-  function getHoursMinutes(d, forecast) {
-    let date;
-    if (forecast === 0) {
-      date = new Date(d);
-    } else {
-      //display the right current time
-      date = new Date();
-    }
-    let hour = date.getHours();
-    let minute = date.getMinutes();
-
-    if (minute < 10) {
-      minute = `0${minute}`;
-    } else {
-      minute = `${minute}`;
-    }
-    if (hour < 10) {
-      hour = `0${hour}`;
-    } else {
-      hour = `${hour}`;
-    }
-
-    return `${hour}:${minute}`;
-  }
 
   let form = (
     <form onSubmit={handleSubmit}>
@@ -149,14 +75,16 @@ export default function Search(props) {
   function getData(response) {
     setCurrentWeather({
       city: response.data.name,
-      date: getCompleteDate(response.data.dt),
-      time: getCompleteTime(response.data.dt),
+      date: response.data.dt,
+      time: response.data.dt,
       degrees: Math.round(response.data.main.temp),
       image: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
       description: response.data.weather[0].description,
       wind: Math.round(response.data.wind.speed),
       humidity: Math.round(response.data.main.humidity),
+      unit: "metric",
     });
+    console.log(currentWeather.unit);
     setLoaded(true);
   }
 
