@@ -1,7 +1,5 @@
 .DisplayData .current-city-name,
-.DisplayData .current-city-data,
-.DisplayData .C-Degrees,
-.DisplayData .F-Degrees {
+.DisplayData .current-city-data {
   font-family: "Baloo Chettan 2", cursive;
   color: #522d5b;
 }
@@ -11,20 +9,6 @@
   border: 1px solid #522d5b;
   border-radius: 4px;
   font-size: 40px;
-}
-
-.DisplayData .C-Degrees,
-.DisplayData .F-Degrees {
-  text-decoration: none;
-  transition: all 200ms ease-in-out;
-}
-
-.DisplayData .C-Degrees:hover,
-.DisplayData .F-Degrees:hover,
-.DisplayData .C-Degrees:focus,
-.DisplayData .F-Degrees:focus {
-  cursor: pointer;
-  color: #900c3f;
 }
 
 .DisplayData .current-city-name {

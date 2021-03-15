@@ -3,31 +3,9 @@ import React from "react";
 import CompleteDate from "./CompleteDate";
 import CompleteTime from "./CompleteTime";
 import WeatherImage from "./WeatherImage";
+import WeatherTemperature from "./WeatherTemperature";
 
 export default function DisplayData(props) {
-  let degrees = props.degrees;
-  function convertToFahrenheitDegree(event) {
-    event.preventDefault();
-    let d = degrees;
-    console.log("To F .." + props.unit + "--- " + d);
-    if (props.unit === "metric") {
-      let de = Math.round(d * 1.8 + 32);
-      degrees = Object.assign(props.degrees, de);
-      console.log("--- " + props.degrees);
-      //Object.assign(props.unit, "imperial");
-      console.log("after F .." + props.unit + "--- ");
-    }
-  }
-
-  function convertToCelsiusDegree(event) {
-    event.preventDefault();
-    let d = degrees;
-    if (props.unit === "imperial") {
-      degrees = Math.round((d - 32) / 1.8);
-      props.unit = "metric";
-    }
-  }
-
   return (
     <div className="DisplayData">
       <div className="container">
@@ -42,25 +20,7 @@ export default function DisplayData(props) {
             </span>
           </div>
           <div className="col-sm current-city-data-temperature">
-            <span className="degrees">{degrees}</span>
-            <span>
-              º
-              <a
-                href="/"
-                className="C-Degrees"
-                onClick={convertToCelsiusDegree}
-              >
-                C
-              </a>
-              |
-              <a
-                href="/"
-                className="F-Degrees"
-                onClick={convertToFahrenheitDegree}
-              >
-                F
-              </a>
-            </span>
+            <WeatherTemperature unit={props.unit} degrees={props.degrees} />
           </div>
           <div className="col-sm">
             <span className="current-city-data-image">

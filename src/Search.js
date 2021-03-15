@@ -84,7 +84,6 @@ export default function Search(props) {
       humidity: Math.round(response.data.main.humidity),
       unit: "metric",
     });
-    console.log(currentWeather.unit);
     setLoaded(true);
   }
 
