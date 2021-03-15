@@ -78,7 +78,7 @@ export default function Search(props) {
       date: response.data.dt,
       time: response.data.dt,
       degrees: Math.round(response.data.main.temp),
-      image: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+      image: response.data.weather[0].icon,
       description: response.data.weather[0].description,
       wind: Math.round(response.data.wind.speed),
       humidity: Math.round(response.data.main.humidity),

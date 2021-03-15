@@ -2,6 +2,7 @@ import "./css/DisplayData.css";
 import React from "react";
 import CompleteDate from "./CompleteDate";
 import CompleteTime from "./CompleteTime";
+import WeatherImage from "./WeatherImage";
 
 export default function DisplayData(props) {
   let degrees = props.degrees;
@@ -63,7 +64,10 @@ export default function DisplayData(props) {
           </div>
           <div className="col-sm">
             <span className="current-city-data-image">
-              <img className="img" src={props.image} alt={props.description} />
+              <div className="img">
+                <WeatherImage image={props.image} />
+                {/* <img className="img" src={props.image} alt={props.description} /> */}
+              </div>
             </span>
             <span className="current-city-data-image-description">
               {props.description}

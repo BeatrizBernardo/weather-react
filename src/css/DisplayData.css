@@ -43,11 +43,7 @@
 }
 
 .DisplayData .current-city-data-image {
-  padding: 0;
-}
-
-.DisplayData .img {
-  max-width: 35%;
+  padding-top: 10px;
 }
 
 .DisplayData .current-city-data-time,
