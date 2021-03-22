@@ -12,6 +12,9 @@ export default function Search(props) {
 
   const [loaded, setLoaded] = useState(false);
 
+  const [typeForecast, setTypeForecast] = useState("Forecast by Days");
+  const [type, setType] = useState("0");
+
   let apiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
   let apiKey = "7ec05f26b77b01d3642a971e0b2d2553";
 
@@ -34,15 +37,27 @@ export default function Search(props) {
         >
           Current City
         </button>
-        {/*
-        <button className="btn search-button" type="button">
-          Forecast by Hours
+
+        <button
+          className="btn search-button"
+          type="button"
+          onClick={changeTypeForecast}
+        >
+          {typeForecast}
         </button>
-        */}
       </div>
     </form>
   );
 
+  function changeTypeForecast(event) {
+    if (typeForecast === "Forecast by Hour") {
+      setTypeForecast("Forecast by Days");
+      setType("0");
+    } else {
+      setTypeForecast("Forecast by Hour");
+      setType("1");
+    }
+  }
   function handleSubmit(event) {
     event.preventDefault();
     getStartedData();
@@ -98,7 +113,7 @@ export default function Search(props) {
           humidity={currentWeather.humidity}
           unit={currentWeather.unit}
         />
-        <Forecast city={currentWeather.city} />
+        <Forecast city={currentWeather.city} tipoForecast={type} />
       </div>
     );
   } else {

@@ -1,11 +1,10 @@
 import React from "react";
-import PartialDate from "./PartialDate.js";
 import WeatherImage from "./WeatherImage.js";
 
 import "./css/DisplayForecast.css";
 import PartialTime from "./PartialTime.js";
 
-export default function DisplayForecast(props) {
+export default function DisplayForecastHour(props) {
   return (
     <div className="DisplayForecast col next-day">
       <div className="row row-cols-1">

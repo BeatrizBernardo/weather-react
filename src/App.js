@@ -10,7 +10,7 @@ export default function App() {
   const [city, setCity] = useState("Porto");
   return (
     <div className="App">
-      <div className="container board">
+      <div className="container">
         {/* <div className="row">*}
           {/*Mudar as frases consuante o tempo */}
         <h1 className="title">Lets see how warm is today!</h1>
