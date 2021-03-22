@@ -12,8 +12,6 @@ export default function Search(props) {
 
   const [loaded, setLoaded] = useState(false);
 
-  const [latitude, setLatitude] = useState();
-  const [longitude, setLongitude] = useState();
   let apiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
   let apiKey = "7ec05f26b77b01d3642a971e0b2d2553";
 
@@ -60,11 +58,7 @@ export default function Search(props) {
     event.preventDefault();
 
     navigator.geolocation.getCurrentPosition(function (position) {
-      setLatitude(position.coords.latitude);
-      console.log(latitude);
-      setLongitude(position.coords.longitude);
-      console.log(longitude);
-      let apiURL = `${apiEndpoint}?appid=${apiKey}&units=${currentWeather.unit}&lat=${latitude}&lon=${longitude}`;
+      let apiURL = `${apiEndpoint}?appid=${apiKey}&units=${currentWeather.unit}&lat=${position.coords.latitude}&lon=${position.coords.longitude}`;
       axios.get(apiURL).then(getData);
     });
   }
