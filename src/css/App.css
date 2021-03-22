@@ -14,6 +14,12 @@ body {
   background-size: 100% 100%;
 }
 
+.App .board {
+  margin-top: 40px;
+  border: 1px solid #522d5b;
+  border-radius: 4px;
+}
+
 .App .title {
   font-family: "Baloo Chettan 2", cursive;
   text-align: center;

@@ -1,4 +1,4 @@
-import Reacy from "react";
+import React from "react";
 import "./css/PartialDate.css";
 export default function PartialDate(props) {
   //receive a date, return in dd/mm

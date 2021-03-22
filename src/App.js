@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import Search from "./Search";
 import ListOfCities from "./ListOfCities";
@@ -7,24 +7,30 @@ import Author from "./Author";
 import "./css/App.css";
 
 export default function App() {
+  const [city, setCity] = useState("Porto");
   return (
     <div className="App">
-      <div className="container">
-        <div className="row">
+      <div className="container board">
+        {/* <div className="row">*}
           {/*Mudar as frases consuante o tempo */}
-          <h1 className="title">Lets see how warm is today!</h1>
+        <h1 className="title">Lets see how warm is today!</h1>
 
-          {/**left side */}
-          <div className="col-sm-8 left-column">
-            <Search city="Porto" />
-          </div>
+        {/**left side
+         *
+         * <div className="col-sm-8 left-column">
+         */}
+        <div className="col-sm-12">
+          <Search city="Porto" />
+          <Author />
+        </div>
 
-          {/**right side */}
+        {/**right side */}
+        {/*
           <div className="col-sm-4 right-column">
             <ListOfCities />
-            <Author />
           </div>
-        </div>
+          */}
+        {/*</div>*/}
       </div>
     </div>
   );

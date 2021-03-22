@@ -4,16 +4,16 @@
   transition: all 200ms ease-in-out;
 }
 
-.WeatherTemperature .C-Degrees:hover,
-.WeatherTemperature .F-Degrees:hover,
-.WeatherTemperature .C-Degrees:focus,
-.WeatherTemperature .F-Degrees:focus {
-  cursor: pointer;
-  color: #900c3f;
-}
-
 .WeatherTemperature .C-Degrees,
 .WeatherTemperature .F-Degrees {
   font-family: "Baloo Chettan 2", cursive;
   color: #522d5b;
+}
+
+.WeatherTemperature .C-Degrees:hover,
+.WeatherTemperature .F-Degrees:hover,
+.WeatherTemperature .C-Degrees:visited,
+.WeatherTemperature .F-Degrees:visited {
+  cursor: pointer;
+  color: #900c3f;
 }

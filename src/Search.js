@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import DisplayData from "./DisplayData";
-import Forecast from "./Forecast";
+import DisplayData from "./DisplayData.js";
+import Forecast from "./Forecast.js";
+import { Eclipse } from "react-loading-io";
 
 import "./css/Search.css";
 
@@ -13,8 +14,7 @@ export default function Search(props) {
 
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
-
-  //let apiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
+  let apiEndpoint = "https://api.openweathermap.org/data/2.5/weather";
   let apiKey = "7ec05f26b77b01d3642a971e0b2d2553";
 
   let form = (
@@ -36,9 +36,11 @@ export default function Search(props) {
         >
           Current City
         </button>
+        {/*
         <button className="btn search-button" type="button">
           Forecast by Hours
         </button>
+        */}
       </div>
     </form>
   );
@@ -55,20 +57,20 @@ export default function Search(props) {
 
   //current city by button
   function showCurrentCityData(event) {
-    /*event.preventDefault();
+    event.preventDefault();
 
     navigator.geolocation.getCurrentPosition(function (position) {
-      console.log(position);
       setLatitude(position.coords.latitude);
+      console.log(latitude);
       setLongitude(position.coords.longitude);
-
-      let apiURL = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&units=${unit}&lat=${latitude}&lon=${longitude}`;
+      console.log(longitude);
+      let apiURL = `${apiEndpoint}?appid=${apiKey}&units=${currentWeather.unit}&lat=${latitude}&lon=${longitude}`;
       axios.get(apiURL).then(getData);
-    });*/
+    });
   }
 
   function getStartedData() {
-    let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${tempCity}&appid=${apiKey}&units=${currentWeather.unit}`;
+    let apiURL = `${apiEndpoint}?q=${tempCity}&appid=${apiKey}&units=${currentWeather.unit}`;
     axios.get(apiURL).then(getData);
   }
 
@@ -102,7 +104,7 @@ export default function Search(props) {
           humidity={currentWeather.humidity}
           unit={currentWeather.unit}
         />
-        <Forecast />
+        <Forecast city={currentWeather.city} />
       </div>
     );
   } else {
@@ -110,7 +112,7 @@ export default function Search(props) {
     return (
       <div className="Search">
         {form}
-        Loading...
+        <Eclipse size={190} color={"#522d5b"} />;
       </div>
     );
   }
