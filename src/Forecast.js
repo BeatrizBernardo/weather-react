@@ -44,7 +44,9 @@ export default function Forecast(props) {
     getStarterForecast();
     return (
       <div className="Forecast">
-        <Eclipse size={190} color={"#522d5b"} />;
+        <div className="loading">
+          <Eclipse size={190} color={"#522d5b"} />;
+        </div>
       </div>
     );
   }
