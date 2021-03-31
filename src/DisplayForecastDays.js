@@ -13,7 +13,7 @@ export default function DisplayForecastDays(props) {
         </div>
         <div className="col">{Math.round(props.info.main.temp)}ºC</div>
         <div className="col">
-          <WeatherImage image={props.info.weather[0].icon} />
+          <WeatherImage image={props.info.weather[0].icon} size={40} />
         </div>
       </div>
     </div>

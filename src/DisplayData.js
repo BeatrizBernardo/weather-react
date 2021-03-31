@@ -25,7 +25,7 @@ export default function DisplayData(props) {
           <div className="col-sm">
             <span className="current-city-data-image">
               <div className="img">
-                <WeatherImage image={props.image} />
+                <WeatherImage image={props.image} size={40} />
                 {/* <img className="img" src={props.image} alt={props.description} /> */}
               </div>
             </span>

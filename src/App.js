@@ -11,26 +11,21 @@ export default function App() {
   return (
     <div className="App">
       <div className="container">
-        {/* <div className="row">*}
+        <div className="row">
           {/*Mudar as frases consuante o tempo */}
-        <h1 className="title">Lets see how warm is today!</h1>
+          <h1 className="title">Lets see how warm is today!</h1>
 
-        {/**left side
-         *
-         * <div className="col-sm-8 left-column">
-         */}
-        <div className="col-sm-12">
-          <Search city="Porto" />
-          <Author />
-        </div>
+          <div className="col-sm-8 left-column">
+            <Search city="Porto" />
+            <Author />
+          </div>
 
-        {/**right side */}
-        {/*
+          {/**right side */}
+
           <div className="col-sm-4 right-column">
             <ListOfCities />
           </div>
-          */}
-        {/*</div>*/}
+        </div>
       </div>
     </div>
   );
